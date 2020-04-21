@@ -37,10 +37,14 @@ image:
 		--build-arg SCHEMA_BUILD_DATE="$(SCHEMA_BUILD_DATE)" \
 		--build-arg SCHEMA_BUILD_VERSION="$(SCHEMA_BUILD_VERSION)" \
 		--build-arg SCHEMA_CMD="$(SCHEMA_CMD)" \
+		--tag sewilk/io-lab-docker-ci-public:latest .
 	
+	docker tag sewilk/io-lab-docker-ci-public:latest sewilk/io-lab-docker-ci-public:$(TAG)
   # TODO: last part of this command that tags just built image with a specyfic tag
 	
 push: image
+	docker push sewilk/io-lab-docker-ci-public:latest
+	docker push sewilk/io-lab-docker-ci-public:$(TAG)
 	# TODO: two commands, first pushes the latest image, second pushes the image tagged with specyfic tag
 	
 clean:
